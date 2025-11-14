@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Copeman Burns - Small Business Consulting in Williamsburg</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+        }
+
+        /* Navigation */
+        nav {
+            background-color: #2c3e50;
+            color: white;
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        nav .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        nav h1 {
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 2rem;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s;
+            font-weight: 500;
+        }
+
+        nav a:hover {
+            color: #3498db;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Pages */
+        .page {
+            display: none;
+            padding: 3rem 0;
+            min-height: calc(100vh - 180px);
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
+            color: white;
+            padding: 4rem 2rem;
+            border-radius: 10px;
+            margin-bottom: 3rem;
+            text-align: center;
+        }
+
+        .hero h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.95;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background-color: #e74c3c;
+            color: white;
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        .cta-button:hover {
+            background-color: #c0392b;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+        }
+
+        /* Features Grid */
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+        }
+
+        .feature-card h3 {
+            color: #2c3e50;
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .feature-card p {
+            color: #555;
+            line-height: 1.8;
+        }
+
+        /* About Section */
+        .about-section {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 10px;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .about-section h2 {
+            color: #2c3e50;
+            margin-bottom: 1.5rem;
+            font-size: 2rem;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 0.5rem;
+        }
+
+        .consultant-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .consultant-card {
+            background: #f8f9fa;
+            padding: 2rem;
+            border-radius: 10px;
+            border-left: 4px solid #3498db;
+        }
+
+        .consultant-card h3 {
+            color: #2c3e50;
+            margin-bottom: 0.5rem;
+            font-size: 1.5rem;
+        }
+
+        .consultant-card .title {
+            color: #3498db;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .consultant-card .contact {
+            color: #555;
+            margin-bottom: 1rem;
+            font-size: 0.95rem;
+        }
+
+        .consultant-card h4 {
+            color: #2c3e50;
+            margin-top: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .consultant-card ul {
+            list-style-position: inside;
+            color: #555;
+            line-height: 1.8;
+        }
+
+        .consultant-card li {
+            margin-bottom: 0.5rem;
+        }
+
+        /* Portfolio Grid */
+        .portfolio-grid {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 600px;
+        }
+
+        th {
+            background-color: #2c3e50;
+            color: white;
+            padding: 1rem;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        td {
+            padding: 1rem;
+            border-bottom: 1px solid #ddd;
+        }
+
+        tr:hover {
+            background-color: #f8f9fa;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 3rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            nav .container {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            nav ul {
+                gap: 1rem;
+            }
+
+            .hero h2 {
+                font-size: 2rem;
+            }
+
+            .consultant-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .features {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .info-box {
+            background-color: #e8f4f8;
+            border-left: 4px solid #3498db;
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border-radius: 5px;
+        }
+
+        .info-box strong {
+            color: #2c3e50;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="container">
+            <h1>Copeman Burns</h1>
+            <ul>
+                <li><a href="#" onclick="showPage('overview')">Overview</a></li>
+                <li><a href="#" onclick="showPage('about')">About Us</a></li>
+                <li><a href="#" onclick="showPage('portfolio')">Portfolio</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Overview Page -->
+    <div id="overview" class="page active">
+        <div class="hero">
+            <div class="container">
+                <h2>Williamsburg's First Affordable Small Business Consulting Firm</h2>
+                <p>Expert consulting services designed specifically for small businesses in the Williamsburg area</p>
+                <a href="#contact" class="cta-button">Schedule Your Free Discovery Meeting</a>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="about-section">
+                <h2>What Makes Us Different</h2>
+                <p>Copeman Burns is the first consulting company focused exclusively on small business consulting in the Williamsburg area that combines effectiveness with affordability. We understand that small businesses need expert guidance without the enterprise-level price tag.</p>
+                
+                <div class="info-box">
+                    <strong>Our Differentiator:</strong>
+                    Unlike traditional consulting firms that price out small businesses, we've built our entire practice around making professional consulting accessible to local Williamsburg businesses. We bring big-firm expertise with small-business understanding.
+                </div>
+            </div>
+
+            <div class="features">
+                <div class="feature-card">
+                    <h3>🎯 Personalized Approach</h3>
+                    <p>We travel directly to your business for a comprehensive 1-hour discovery meeting. This hands-on approach allows us to understand your unique challenges, culture, and opportunities firsthand.</p>
+                </div>
+
+                <div class="feature-card">
+                    <h3>💰 Transparent Pricing</h3>
+                    <p>At $50 per hour, our services are designed to be accessible to small businesses. Most engagement plans are structured around 10 hours of consulting work, providing substantial value without breaking the bank.</p>
+                </div>
+
+                <div class="feature-card">
+                    <h3>🤝 Free Discovery Meeting</h3>
+                    <p>Your first hour is completely free. We come to your location, discuss your business challenges, and develop a personalized consulting plan. No obligation, no pressure, just honest advice.</p>
+                </div>
+
+                <div class="feature-card">
+                    <h3>📊 Flexible Engagement</h3>
+                    <p>After the discovery meeting, you decide the scope and timeline. Whether you need help with operations, strategy, technology implementation, or business optimization, we tailor our services to your needs.</p>
+                </div>
+
+                <div class="feature-card">
+                    <h3>🔧 Technical Expertise</h3>
+                    <p>Our team brings experience from healthcare systems, software implementation, business development, and project management. We solve complex problems with practical, implementable solutions.</p>
+                </div>
+
+                <div class="feature-card">
+                    <h3>📍 Local Focus</h3>
+                    <p>As Williamsburg-based consultants, we understand the local business environment and can provide context-specific recommendations that work in our community.</p>
+                </div>
+            </div>
+
+            <div class="about-section">
+                <h2>How It Works</h2>
+                <div class="features">
+                    <div class="feature-card">
+                        <h3>Step 1: Schedule</h3>
+                        <p>Contact us to schedule your free 1-hour discovery meeting. We'll find a time that works with your schedule.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>Step 2: Discovery</h3>
+                        <p>We visit your business, learn about your operations, challenges, and goals. Together, we develop a personalized consulting plan.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>Step 3: Execute</h3>
+                        <p>Once you approve the plan, we get to work. Most engagements are 10 hours at $50/hour, but we're flexible based on your needs.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="about-section" id="contact">
+                <h2>Ready to Get Started?</h2>
+                <p style="margin-bottom: 1rem;">Sign up for your free 1-hour discovery meeting today. No strings attached, no pressure. Just expert advice for your business.</p>
+                <p><strong>Email:</strong> nmburns@wm.edu</p>
+                <p><strong>Phone:</strong> (703) 785-2921</p>
+                <p style="margin-top: 1rem;"><em>Serving small businesses throughout the Williamsburg, Virginia area</em></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- About Us Page -->
+    <div id="about" class="page">
+        <div class="container">
+            <div class="about-section">
+                <h2>About Copeman Burns</h2>
+                <p>Copeman Burns was founded on a simple principle: small businesses deserve access to high-quality consulting services without enterprise-level costs. Our team combines diverse experience in healthcare systems, software implementation, youth development, business optimization, and strategic planning to deliver practical solutions for real-world business challenges.</p>
+                <p style="margin-top: 1rem;">Based in Williamsburg, Virginia, we're committed to supporting the growth and success of local businesses through personalized, affordable, and effective consulting services.</p>
+            </div>
+
+            <div class="about-section">
+                <h2>Our Team</h2>
+                <div class="consultant-grid">
+                    <div class="consultant-card">
+                        <h3>Nathaniel Burns</h3>
+                        <p class="title">Consultant</p>
+                        <p class="contact">📧 nmburns@wm.edu | 📱 (703) 785-2921 | 🔗 linkedin.com/in/nathanielmatthewharrisonburns</p>
+                        
+                        <h4>Education</h4>
+                        <ul>
+                            <li><strong>MBA Candidate</strong> - William & Mary, Raymond A. Mason School of Business (Expected May 2027)</li>
+                            <li><strong>B.A. in Biology</strong> with Health and Wellbeing Minor - University of Virginia (2020)</li>
+                        </ul>
+
+                        <h4>Experience Highlights</h4>
+                        <ul>
+                            <li><strong>Peace Corps, Belize</strong> - Youth Development Volunteer: Co-designed office management strategy reducing work hours by 10 hours/month through process simplification. Created and delivered training on national sports database with documentation and support.</li>
+                            <li><strong>Heuristic Solutions</strong> - Led software implementation projects for certification boards, managing UI updates, API integrations, and rollouts.</li>
+                            <li><strong>Epic Systems</strong> - Project Manager: Managed healthcare analytics implementations with large organizations, partnered with developers to streamline workflows by 30%.</li>
+                            <li><strong>Hanover Research</strong> - Business Development Associate: Initiated client relationships through outreach campaigns.</li>
+                        </ul>
+
+                        <h4>Expertise</h4>
+                        <ul>
+                            <li>Project management and software implementation</li>
+                            <li>Healthcare systems and analytics</li>
+                            <li>Business process optimization</li>
+                            <li>Data management and migration</li>
+                            <li>Training development and delivery</li>
+                            <li>Technical skills: SQL, HTML, Microsoft Office Suite, CRM tools, Jira, AWS</li>
+                            <li>Six Sigma Yellow Belt certified</li>
+                        </ul>
+                    </div>
+
+                    <div class="consultant-card">
+                        <h3>Tom Copeman</h3>
+                        <p class="title">Consultant</p>
+                        <p class="contact">📧 [Contact information to be added]</p>
+                        
+                        <h4>Education</h4>
+                        <p style="color: #555; margin-top: 0.5rem;">[Education background to be added]</p>
+
+                        <h4>Experience Highlights</h4>
+                        <p style="color: #555; margin-top: 0.5rem;">[Professional experience to be added]</p>
+
+                        <h4>Expertise</h4>
+                        <p style="color: #555; margin-top: 0.5rem;">[Areas of expertise to be added]</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="about-section">
+                <h2>Why Work With Us?</h2>
+                <p>Our team brings together technical expertise, business acumen, and real-world problem-solving experience. We've worked with organizations ranging from small nonprofits to large healthcare systems, giving us the versatility to understand and address challenges across different business contexts.</p>
+                <p style="margin-top: 1rem;">What sets us apart is our commitment to the Williamsburg small business community and our belief that effective consulting should be accessible to every business, regardless of size.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Portfolio Page -->
+    <div id="portfolio" class="page">
+        <div class="container">
+            <div class="about-section">
+                <h2>Our Portfolio</h2>
+                <p>Below are examples of our consulting engagements. Each project demonstrates our commitment to delivering measurable results for small businesses in the Williamsburg area.</p>
+            </div>
+
+            <div class="portfolio-grid">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Project</th>
+                            <th>Company</th>
+                            <th>Contact</th>
+                            <th>Result</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Data Management & Strategy Transformation</td>
+                            <td>Virginia Coalition of Open Government</td>
+                            <td>[Contact information]</td>
+                            <td>Successfully migrated data to new platform and created optimized workflows for improved operational efficiency</td>
+                        </tr>
+                        <tr>
+                            <td>[Project name]</td>
+                            <td>[Company name]</td>
+                            <td>[Contact information]</td>
+                            <td>[Project results and outcomes]</td>
+                        </tr>
+                        <tr>
+                            <td>[Project name]</td>
+                            <td>[Company name]</td>
+                            <td>[Contact information]</td>
+                            <td>[Project results and outcomes]</td>
+                        </tr>
+                        <tr>
+                            <td>[Project name]</td>
+                            <td>[Company name]</td>
+                            <td>[Contact information]</td>
+                            <td>[Project results and outcomes]</td>
+                        </tr>
+                        <tr>
+                            <td>[Project name]</td>
+                            <td>[Company name]</td>
+                            <td>[Contact information]</td>
+                            <td>[Project results and outcomes]</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="about-section" style="margin-top: 2rem;">
+                <h2>Interested in Working Together?</h2>
+                <p>If you'd like to learn more about how we've helped businesses like yours, or if you're ready to schedule your free discovery meeting, please reach out:</p>
+                <p style="margin-top: 1rem;"><strong>Email:</strong> nmburns@wm.edu</p>
+                <p><strong>Phone:</strong> (703) 785-2921</p>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Copeman Burns Consulting. Serving small businesses in Williamsburg, Virginia.</p>
+            <p style="margin-top: 0.5rem;">Affordable. Effective. Local.</p>
+        </div>
+    </footer>
+
+    <script>
+        function showPage(pageId) {
+            // Hide all pages
+            const pages = document.querySelectorAll('.page');
+            pages.forEach(page => {
+                page.classList.remove('active');
+            });
+            
+            // Show selected page
+            document.getElementById(pageId).classList.add('active');
+            
+            // Scroll to top
+            window.scrollTo(0, 0);
+        }
+    </script>
+</body>
+</html>
